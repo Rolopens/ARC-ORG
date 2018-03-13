@@ -15,7 +15,7 @@ def binaryToFloat(value):
  
 # floats are represented by IEEE 754 floating-point format which are 
 # 64 bits long (not 32 bits)
-def main();
+def main():
     deciInput = input("Input decimal mantissa: ")
     deciExpInput = input("Input exponent (10^x): ")
     deciInput = float(deciInput)
@@ -39,3 +39,5 @@ def main();
         #print(binstr + '\n')
     if (inp == 0):
         print("0x0000000000000000")
+
+main()
