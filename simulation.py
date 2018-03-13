@@ -19,14 +19,14 @@ def zeroCase():
     print( "0x" + "0" * 16)
 
 def NaNCase(deciNumber, negBit):
-    print("fix this")
+    print("TODO: NaN Case")
 
 def denormalizedCase(deciNumber, negBit):
-    print("Fix This ples")
+    print("TODO: Denormalized Case")
 
 def main():
-    deciInput = input("Input decimal Number: ")
-    deciExpInput = input("Input exponent of number (10^x): ")
+    deciInput = input("Input decimal mantissa: ")
+    deciExpInput = input("Input exponent (10^x): ")
 
     deciInput = float(deciInput)
     deciExpInput = int(deciExpInput)
