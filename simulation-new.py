@@ -1,14 +1,41 @@
 import struct
+#Rolo's Version
+#todo: everything
 
-def main():
+
+getBin = lambda x: x > 0 and str(bin(x))[2:] or "-" + str(bin(x))[3:]
+ 
+def floatToBinary64(value):
+    val = struct.unpack('Q', struct.pack('d', value))[0]
+    return getBin(val)
+ 
+def binaryToFloat(value):
+    hx = hex(int(value, 2))   
+    return struct.unpack("d", struct.pack("q", int(hx, 16)))[0]
+ 
+# floats are represented by IEEE 754 floating-point format which are 
+# 64 bits long (not 32 bits)
+def main();
     deciInput = input("Input decimal mantissa: ")
     deciExpInput = input("Input exponent (10^x): ")
-
     deciInput = float(deciInput)
-    deciExpInput = float(deciExpInput)
+    deciExpInput = int(deciExpInput)
 
-    product = deciInput * 10 ** deciExpInput
 
-    print(product)
+    inp = (deciInput * (10 ** deciExpInput));
 
-main()
+    # float to binary
+    binstr = floatToBinary64(inp)
+    print('Binary equivalent:')
+
+    if (inp < 1.0 and inp > 0.0):
+        print("0x" + hex(int(binstr, 2)))
+        #print("00" + binstr + '\n')
+    elif (inp > 0):
+        print("0x" +hex(int(binstr, 2)))
+        #print('0' + binstr + '\n')
+    if (inp < 0):
+        print("0x" +hex(int(binstr, 2)))
+        #print(binstr + '\n')
+    if (inp == 0):
+        print("0x0000000000000000")
