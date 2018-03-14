@@ -13,6 +13,28 @@ def binaryToFloat(value):
     hx = hex(int(value, 2))   
     return struct.unpack("d", struct.pack("q", int(hx, 16)))[0]
  
+def manualExponent(mantissa, exp):
+    listMan = list(str(mantissa))
+    while exp != 0:
+        if exp > 0:
+            if listMan.index('.')==len(listMan)-1:
+                listMan.append('0')
+            inDot = listMan.index(".")
+            listMan[inDot] = listMan[inDot+1]
+            listMan[inDot+1] = '.'
+            exp -= 1
+        elif exp < 0:
+            if listMan.index('.')==0:
+                listMan.insert(0, '0')
+            inDot = listMan.index(".")
+            listMan[inDot] = listMan[inDot-1]
+            listMan[inDot-1] = '.'
+            exp += 1
+    strMan = ""
+    for x in listMan:
+        strMan += x
+    return float(strMan)
+
 # floats are represented by IEEE 754 floating-point format which are 
 # 64 bits long (not 32 bits)
 def main():
@@ -22,6 +44,9 @@ def main():
     deciExpInput = int(deciExpInput)
 
     inp = (deciInput * (10 ** deciExpInput));
+    print(inp)
+    inp = manualExponent(deciInput, deciExpInput)
+    print(inp)
 
     # float to binary
     binstr = binary64Converter(inp)
