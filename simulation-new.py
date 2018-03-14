@@ -68,11 +68,15 @@ def fillHex(hexString):
 # floats are represented by IEEE 754 floating-point format which are 
 # 64 bits long (not 32 bits)
 def main():
-    deciInput = input("Input decimal mantissa: ")
-    deciExpInput = input("Input exponent (10^x): ")
-    deciInput = float(deciInput)
-    deciExpInput = int(deciExpInput)
-    overflowFlag = False
+    try:
+        deciInput = input("Input decimal mantissa: ")
+        deciExpInput = input("Input exponent (10^x): ")
+        deciInput = float(deciInput)
+        deciExpInput = int(deciExpInput)
+        overflowFlag = False
+    except ValueError:
+        print("NaN")
+        return
 
     try:
         inp = manualExponent(deciInput, deciExpInput)
@@ -86,16 +90,11 @@ def main():
     print('Binary:')
     if (overflowFlag == True):
         print ("0 11111111111 0000000000000000000000000000000000000000000000000000")
-    elif (inp < 1.0 and inp > 0.0):
-        binstr = fillBin(binstr)
-        m = binstr[:10]
-        e = binstr[10:]
-        print('0 0' + m + ' ' + e + '\n')
     elif (inp > 0):
         binstr = fillBin(binstr)
-        m = binstr[:11]
-        e = binstr[11:]
-        print('0 ' + m + ' ' + e + '\n')
+        m = binstr[:12]
+        e = binstr[12:]
+        print(m[0] + ' ' + m[1:] + ' ' + e + '\n')
     elif (inp < 0):
         binstrTruncate = binstr[1:]
         m = binstrTruncate[:11]
