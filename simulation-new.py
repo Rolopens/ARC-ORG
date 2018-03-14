@@ -5,7 +5,7 @@ import struct
 
 getBin = lambda x: x > 0 and str(bin(x))[2:] or "-" + str(bin(x))[3:]
  
-def floatToBinary64(value):
+def binary64Converter(value):
     val = struct.unpack('Q', struct.pack('d', value))[0]
     return getBin(val)
  
@@ -21,21 +21,37 @@ def main():
     deciInput = float(deciInput)
     deciExpInput = int(deciExpInput)
 
-
     inp = (deciInput * (10 ** deciExpInput));
 
     # float to binary
-    binstr = floatToBinary64(inp)
-    print('Binary equivalent:')
-
+    binstr = binary64Converter(inp)
+		
+	
+    print('Binary:')
     if (inp < 1.0 and inp > 0.0):
-        print("0x" + hex(int(binstr, 2)))
+        print(hex(int(binstr, 2)))
+        print("00" + binstr + '\n')
+    elif (inp > 0):
+        m = binstr[:11]
+        e = binstr[11:]
+        print('0 ' + m + ' ' + e + '\n')
+    if (inp < 0):
+        binstr = binstr[1:]
+        m = binstr[:11]
+        e = binstr[11:]
+        print('1 ' + m + ' ' + e + '\n')
+    if (inp == 0):
+        print("0x0000000000000000")
+
+    print('Hexadecimal:')
+    if (inp < 1.0 and inp > 0.0):
+        print(hex(int(binstr, 2)))
         #print("00" + binstr + '\n')
     elif (inp > 0):
-        print("0x" +hex(int(binstr, 2)))
+        print(hex(int(binstr, 2)))
         #print('0' + binstr + '\n')
     if (inp < 0):
-        print("0x" +hex(int(binstr, 2)))
+        print(hex(int(binstr, 2)))
         #print(binstr + '\n')
     if (inp == 0):
         print("0x0000000000000000")
